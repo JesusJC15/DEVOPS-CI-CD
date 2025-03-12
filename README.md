@@ -53,12 +53,17 @@ El primer job se llamará build, el segundo test y el tercero deploy, además, e
 
 ### 6. Configura el job deploy que creaste en el paso 2 y usando el action azure/webapps-deploy@v2 despliega el jar generado a tu servicio de App Service
 
+
 ### 7. Verifica qué el endpoint de la aplicación generado en App Service
+
 
 ### 8. En este punto la aplicación no debería funcionar, ¿Donde puedes ver el mensaje de error de la aplicación o logs?, (probáblemente está fallando debido a que el puerto usado para despliegue no es el esperado (puerto 80), modifícalo en el application.properties)
 
+
 ### 9. En este punto la aplicación no debería funcionar totalmente debido a qué no hay una base de datos preparada, debes verificar esta situación a través de los logs, crea una base de datos MySQL con facturación de 0 dólares
 
+
 ### 10. Para utilizar la base de datos, configura los datos de conexión como una o varias variables de entorno tanto en App Service como en el archivo application.properties de tu proyecto
+
 
 ### 11. Prueba nuevamente la aplicación, ya debería estar funcionando!
