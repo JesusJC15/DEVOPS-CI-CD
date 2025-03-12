@@ -79,5 +79,4 @@ jobs:
           app-name: 'ecireserves'
           slot-name: 'Production'
           package: '*.jar'
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          
