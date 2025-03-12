@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -40,6 +39,22 @@ class ReservationControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @SuppressWarnings("null")
+    @Test
+    void getReservations_ShouldReturnZeroReservation() {
+        List<Reservation> reservations = Arrays.asList();
+        when(reservationService.getAllReservations()).thenReturn(reservations);
+
+        ResponseEntity<ApiResponse<List<Reservation>>> response = reservationController.getAllReservations();
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(response.getBody().isSuccess());
+        assertEquals(0, response.getBody().getData().size());
+        verify(reservationService, times(1)).getAllReservations();
+    }
+    
+    @SuppressWarnings("null")
     @Test
     void getAllReservations_ShouldReturnListOfReservations() {
         List<Reservation> reservations = Arrays.asList(new Reservation("1", "u1", "l1", LocalDate.now(), LocalTime.now(), 30, "description", ReservationStatus.AGENDADA));
@@ -54,6 +69,7 @@ class ReservationControllerTest {
         verify(reservationService, times(1)).getAllReservations();
     }
 
+    @SuppressWarnings("null")
     @Test
     void getReservationsByUserId_ShouldReturnReservations() {
         List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 60, "Study", ReservationStatus.AGENDADA));
@@ -68,6 +84,7 @@ class ReservationControllerTest {
         verify(reservationService, times(1)).getReservationsByUserId("user1");
     }
 
+    @SuppressWarnings("null")
     @Test
     void getReservationsByLaboratoryId_ShouldReturnReservations() {
         List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 120, "Study", ReservationStatus.AGENDADA));
@@ -82,6 +99,7 @@ class ReservationControllerTest {
         verify(reservationService, times(1)).getReservationsByLaboratoryId("lab1");
     }
 
+    @SuppressWarnings("null")
     @Test
     void getReservationsByStatus_ShouldReturnReservations() {
         List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 30, "Study", ReservationStatus.AGENDADA));
@@ -96,6 +114,7 @@ class ReservationControllerTest {
         verify(reservationService, times(1)).getReservationsByStatus(ReservationStatus.AGENDADA);
     }
 
+    @SuppressWarnings("null")
     @Test
     void createReservation_ShouldReturnCreatedReservation() throws EciReservesException {
         ReservationDTO reservationDTO = new ReservationDTO("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 30, "Study");
@@ -111,6 +130,7 @@ class ReservationControllerTest {
         verify(reservationService, times(1)).createReservation(reservationDTO);
     }
 
+    @SuppressWarnings("null")
     @Test
     void updateReservation_ShouldReturnUpdatedReservation() throws EciReservesException {
         ReservationDTO reservationDTO = new ReservationDTO("1", "user1", "lab1", LocalDate.now(), LocalTime.of(11, 0), 30, "Updated Study");
@@ -126,18 +146,22 @@ class ReservationControllerTest {
         verify(reservationService, times(1)).updateReservation("1", reservationDTO);
     }
 
+    @SuppressWarnings("null")
     @Test
     void deleteReservation_ShouldReturnSuccessMessage() throws EciReservesException {
-        doNothing().when(reservationService).deleteReservation("1");
-
+        List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 120, "Study", ReservationStatus.AGENDADA));
+        when(reservationService.getReservationsByUserId("user1")).thenReturn(reservations);
+        
         ResponseEntity<ApiResponse<Void>> response = reservationController.deleteReservation("1");
 
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getBody().isSuccess());
+        assertEquals("Reserva eliminada", response.getBody().getMessage());
         verify(reservationService, times(1)).deleteReservation("1");
     }
 
+    @SuppressWarnings("null")
     @Test
     void getReservationsByUserIdAndStatus_ShouldReturnReservations() {
         List<Reservation> reservations = Arrays.asList(
@@ -154,6 +178,7 @@ class ReservationControllerTest {
         verify(reservationService, times(1)).getReservationsByUserIdAndStatus("user1", ReservationStatus.AGENDADA);
     }
 
+    @SuppressWarnings("null")
     @Test
     void getReservationsByDuration_ShouldReturnReservations() {
         List<Reservation> reservations = Arrays.asList(
@@ -170,6 +195,7 @@ class ReservationControllerTest {
         verify(reservationService, times(1)).getReservationsByDuration(60);
     }
 
+    @SuppressWarnings("null")
     @Test
     void getReservationsByDate_ShouldReturnReservations() {
         LocalDate date = LocalDate.now();
@@ -187,6 +213,7 @@ class ReservationControllerTest {
         verify(reservationService, times(1)).getReservationsByDate(date);
     }
 
+    @SuppressWarnings("null")
     @Test
     void getReservationsByStartTime_ShouldReturnReservations() {
         LocalTime startTime = LocalTime.of(10, 0);

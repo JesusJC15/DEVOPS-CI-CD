@@ -1,9 +1,13 @@
 # DEVOPS/CI/CD
 
-## Natalia Espitia Espinel
-## Jesús Alberto Jauregui Conde
-## Santiago Hurtado Martí|nez
-## Andrés Felipe Calderón Ramírez
+## Integrantes
+Natalia Espitia Espinel
+
+Jesús Alberto Jauregui Conde
+
+Santiago Hurtado Martínez
+
+Andrés Felipe Calderón Ramírez
 
 ## Creando los Pipelines (CI - Continous Integration)
 
@@ -29,17 +33,18 @@ El primer job se llamará build, el segundo test y el tercero deploy, además, e
 
 ### 3. Agregar los siguientes tests
 - Dado que tengo 1 reserva registrada, Cuando lo consulto a nivel de servicio, Entonces la consulta será exitosa validando el campo id.
-
+![](/assets/8.png)
 - Dado que no hay ninguna reserva registrada, Cuándo la consulto a nivel de servicio, Entonces la consulta no retornará ningún resultado.
-
+![](/assets/9.png)
 - Dado que no hay ninguna reserva registrada, Cuándo lo creo a nivel de servicio, Entonces la creación será exitosa.
-
+![](/assets/10.png)
 - Dado que tengo 1 reserva registrada, Cuándo la elimino a nivel de servicio, Entonces la eliminación será exitosa.
-
+![](/assets/11.png)
 - Dado que tengo 1 reserva registrada, Cuándo la elimino y consulto a nivel de servicio, Entonces el resultado de la consulta no retornará ningún resultado.
+![](/assets/5.png)
 
 ### 4. Verifica que la ejecución del workflow es exitosa, si no lo fuera, modifícalo hasta que ocurra
-![](/assets/7.png)
+![](/assets/12.png)
 
 
 ## Desplegando en Azure usando CI/CD (Continous Deployment / Continous Delivery)
