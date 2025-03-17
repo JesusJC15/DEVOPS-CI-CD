@@ -43,7 +43,7 @@ class ReservationControllerTest {
     @SuppressWarnings("null")
     @Test
     void getAllReservations_ShouldReturnListOfReservations() {
-        List<Reservation> reservations = Arrays.asList(new Reservation("1", "u1", "l1", LocalDate.now(), LocalTime.now(), 30, "description", ReservationStatus.AGENDADA));
+        List<Reservation> reservations = Arrays.asList(new Reservation("1", "u1", "l1", LocalDate.now(), LocalTime.now(), 30, 1, "description", ReservationStatus.AGENDADA));
         when(reservationService.getAllReservations()).thenReturn(reservations);
 
         ResponseEntity<ApiResponse<List<Reservation>>> response = reservationController.getAllReservations();
@@ -58,7 +58,7 @@ class ReservationControllerTest {
     @SuppressWarnings("null")
     @Test
     void getReservationsByUserId_ShouldReturnReservations() {
-        List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 60, "Study", ReservationStatus.AGENDADA));
+        List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 60, 1, "Study", ReservationStatus.AGENDADA));
         when(reservationService.getReservationsByUserId("user1")).thenReturn(reservations);
 
         ResponseEntity<ApiResponse<List<Reservation>>> response = reservationController.getReservationsByUserId("user1");
@@ -73,7 +73,7 @@ class ReservationControllerTest {
     @SuppressWarnings("null")
     @Test
     void getReservationsByLaboratoryId_ShouldReturnReservations() {
-        List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 120, "Study", ReservationStatus.AGENDADA));
+        List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 120, 1, "Study", ReservationStatus.AGENDADA));
         when(reservationService.getReservationsByLaboratoryId("lab1")).thenReturn(reservations);
 
         ResponseEntity<ApiResponse<List<Reservation>>> response = reservationController.getReservationsByLaboratoryId("lab1");
@@ -88,7 +88,7 @@ class ReservationControllerTest {
     @SuppressWarnings("null")
     @Test
     void getReservationsByStatus_ShouldReturnReservations() {
-        List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 30, "Study", ReservationStatus.AGENDADA));
+        List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 30, 1, "Study", ReservationStatus.AGENDADA));
         when(reservationService.getReservationsByStatus(ReservationStatus.AGENDADA)).thenReturn(reservations);
 
         ResponseEntity<ApiResponse<List<Reservation>>> response = reservationController.getReservationsByStatus(ReservationStatus.AGENDADA);
@@ -104,7 +104,7 @@ class ReservationControllerTest {
     @Test
     void createReservation_ShouldReturnCreatedReservation() throws EciReservesException {
         ReservationDTO reservationDTO = new ReservationDTO("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 30, "Study");
-        Reservation createdReservation = new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 30, "Study", ReservationStatus.AGENDADA);
+        Reservation createdReservation = new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 30, 1, "Study", ReservationStatus.AGENDADA);
         when(reservationService.createReservation(reservationDTO)).thenReturn(createdReservation);
 
         ResponseEntity<ApiResponse<Reservation>> response = reservationController.createReservation(reservationDTO);
@@ -120,7 +120,7 @@ class ReservationControllerTest {
     @Test
     void updateReservation_ShouldReturnUpdatedReservation() throws EciReservesException {
         ReservationDTO reservationDTO = new ReservationDTO("1", "user1", "lab1", LocalDate.now(), LocalTime.of(11, 0), 30, "Updated Study");
-        Reservation updatedReservation = new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(11, 0), 30, "Updated Study", ReservationStatus.AGENDADA);
+        Reservation updatedReservation = new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(11, 0), 30, 1, "Updated Study", ReservationStatus.AGENDADA);
         when(reservationService.updateReservation("1", reservationDTO)).thenReturn(updatedReservation);
 
         ResponseEntity<ApiResponse<Reservation>> response = reservationController.updateReservation("1", reservationDTO);
@@ -149,7 +149,7 @@ class ReservationControllerTest {
     @Test
     void getReservationsByUserIdAndStatus_ShouldReturnReservations() {
         List<Reservation> reservations = Arrays.asList(
-            new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 30, "Study", ReservationStatus.AGENDADA)
+            new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 30, 1, "Study", ReservationStatus.AGENDADA)
         );
         when(reservationService.getReservationsByUserIdAndStatus("user1", ReservationStatus.AGENDADA)).thenReturn(reservations);
 
@@ -166,7 +166,7 @@ class ReservationControllerTest {
     @Test
     void getReservationsByDuration_ShouldReturnReservations() {
         List<Reservation> reservations = Arrays.asList(
-            new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 60, "Study", ReservationStatus.AGENDADA)
+            new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 60,  1, "Study", ReservationStatus.AGENDADA)
         );
         when(reservationService.getReservationsByDuration(60)).thenReturn(reservations);
 
@@ -184,7 +184,7 @@ class ReservationControllerTest {
     void getReservationsByDate_ShouldReturnReservations() {
         LocalDate date = LocalDate.now();
         List<Reservation> reservations = Arrays.asList(
-            new Reservation("1", "user1", "lab1", date, LocalTime.of(10, 0), 30, "Study", ReservationStatus.AGENDADA)
+            new Reservation("1", "user1", "lab1", date, LocalTime.of(10, 0), 30, 1, "Study", ReservationStatus.AGENDADA)
         );
         when(reservationService.getReservationsByDate(date)).thenReturn(reservations);
 
@@ -202,7 +202,7 @@ class ReservationControllerTest {
     void getReservationsByStartTime_ShouldReturnReservations() {
         LocalTime startTime = LocalTime.of(10, 0);
         List<Reservation> reservations = Arrays.asList(
-            new Reservation("1", "user1", "lab1", LocalDate.now(), startTime, 30, "Study", ReservationStatus.AGENDADA)
+            new Reservation("1", "user1", "lab1", LocalDate.now(), startTime, 30, 1, "Study", ReservationStatus.AGENDADA)
         );
         when(reservationService.getReservationsByStartTime(startTime)).thenReturn(reservations);
 

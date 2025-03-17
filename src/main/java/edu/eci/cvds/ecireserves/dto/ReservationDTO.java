@@ -20,6 +20,7 @@ public class ReservationDTO {
     private LocalDate date;
     private LocalTime startTime;
     private Integer duration;
+    private Integer priority;
     private LocalTime newStartLocalTime;
     private Integer newDuration;
     private String purpose;

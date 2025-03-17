@@ -1,4 +1,4 @@
-# DEVOPS/CI/CD
+# CI/CD
 
 ## Integrantes
 Natalia Espitia Espinel
@@ -9,15 +9,17 @@ Santiago Hurtado Martínez
 
 Andrés Felipe Calderón Ramírez
 
-## Creando los Pipelines (CI - Continous Integration)
+## PARTE I. DEVOPS / CI-CD
+
+### Creando los Pipelines (CI - Continous Integration)
 
 Usando el mismo código del proyecto realizado en el laboratorio 4 (generar un repositorio nuevo), para hacer lo siguiente:
 
-### 1. Subir el nuevo repositorio a GitHub
+#### 1. Subir el nuevo repositorio a GitHub
 
 ![](/assets/1.png)
 
-### 2. Configurar en github actions un workflow que contendrá 3 jobs
+#### 2. Configurar en github actions un workflow que contendrá 3 jobs
 
 El primer job se llamará build, el segundo test y el tercero deploy, además, este workflow se disparará (events/trigger) on: pull_request, para esto puede usar como base este tutorial o cualquier otro qué considere. Deberás hacer steps o actions sobre cada job para que se pueda obtener los siguiente:
 
@@ -34,7 +36,7 @@ El primer job se llamará build, el segundo test y el tercero deploy, además, e
 ![](/assets/4.png)
 ![](/assets/5.png)
 
-### 3. Agregar los siguientes tests
+#### 3. Agregar los siguientes tests
 - Dado que tengo 1 reserva registrada, Cuando lo consulto a nivel de servicio, Entonces la consulta será exitosa validando el campo id.
 
 ![](/assets/8.png)
@@ -55,36 +57,36 @@ El primer job se llamará build, el segundo test y el tercero deploy, además, e
 
 ![](/assets/12.png)
 
-### 4. Verifica que la ejecución del workflow es exitosa, si no lo fuera, modifícalo hasta que ocurra
+#### 4. Verifica que la ejecución del workflow es exitosa, si no lo fuera, modifícalo hasta que ocurra
 
 ![](/assets/7.png)
 
-## Desplegando en Azure usando CI/CD (Continous Deployment / Continous Delivery)
+### Desplegando en Azure usando CI/CD (Continous Deployment / Continous Delivery)
 
-### 5. En Azure crea un servicio de App Service con recursos que facturen 0 dólares
+#### 5. En Azure crea un servicio de App Service con recursos que facturen 0 dólares
 
 ![](/assets/6.png)
 
-### 6. Configura el job deploy que creaste en el paso 2 y usando el action azure/webapps-deploy@v2 despliega el jar generado a tu servicio de App Service
+#### 6. Configura el job deploy que creaste en el paso 2 y usando el action azure/webapps-deploy@v2 despliega el jar generado a tu servicio de App Service
 
 ![](/assets/13.png)
 
-### 7. Verifica qué el endpoint de la aplicación generado en App Service
+#### 7. Verifica qué el endpoint de la aplicación generado en App Service
 
 ![](/assets/14.png)
 
-### 8. En este punto la aplicación no debería funcionar, ¿Donde puedes ver el mensaje de error de la aplicación o logs?, (probáblemente está fallando debido a que el puerto usado para despliegue no es el esperado (puerto 80), modifícalo en el application.properties)
+#### 8. En este punto la aplicación no debería funcionar, ¿Donde puedes ver el mensaje de error de la aplicación o logs?, (probáblemente está fallando debido a que el puerto usado para despliegue no es el esperado (puerto 80), modifícalo en el application.properties)
 
 ![](/assets/15.png)
 
-### 9. En este punto la aplicación no debería funcionar totalmente debido a qué no hay una base de datos preparada, debes verificar esta situación a través de los logs, crea una base de datos MySQL con facturación de 0 dólares
+#### 9. En este punto la aplicación no debería funcionar totalmente debido a qué no hay una base de datos preparada, debes verificar esta situación a través de los logs, crea una base de datos MySQL con facturación de 0 dólares
 Este punto no se pudieron realizar con MySQL sino que se realizaron con conexión con MongoDB Atlas
 
 
-### 10. Para utilizar la base de datos, configura los datos de conexión como una o varias variables de entorno tanto en App Service como en el archivo application.properties de tu proyecto
+#### 10. Para utilizar la base de datos, configura los datos de conexión como una o varias variables de entorno tanto en App Service como en el archivo application.properties de tu proyecto
 Este punto no se pudieron realizar con MySQL sino que se realizaron con conexión con MongoDB Atlas
 
-### 11. Prueba nuevamente la aplicación, ya debería estar funcionando!
+#### 11. Prueba nuevamente la aplicación, ya debería estar funcionando!
 Funcionamiento de la aplicación con MongoDB Atlas y Postman para ingresar los datos
 
 ![](/assets/16.png)
@@ -96,4 +98,17 @@ Funcionamiento de la aplicación con MongoDB Atlas y Postman para ingresar los d
 ![](/assets/18.png)
 
 ![](/assets/20.png)
+
+## PARTE II. GRÁFICOS
+
+### Generación de datos por procedimientos
+
+Sobre el mismo proyecto:
+
+#### 1. Agrega un nuevo campo, prioridad de la reserva(de 1 a 5) donde 1 es baja prioridad y 5 alta.
+
+![](/assets/21.png)
+![](/assets/22.png)
+
+#### 2. Genera "proceduralmente" nuevas reservas, aleatoriamente serán entre 100 y 1000 (Corresponden a las reservas de los laboratorios). No se necesita crear ningún tipo de interfaz gráfica para poder llenarla, esta parte de la lógica pertenece al dominio de la capa de servicio.
 

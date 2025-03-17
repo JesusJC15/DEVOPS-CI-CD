@@ -25,6 +25,7 @@ public class Reservation {
     private LocalDate date;
     private LocalTime startTime;
     private Integer duration;
+    private Integer priority;
     private String purpose;
     private ReservationStatus status;
 }
