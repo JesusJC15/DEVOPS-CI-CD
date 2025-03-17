@@ -32,7 +32,7 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
-          
+
   test:
     runs-on: windows-latest
     needs: build
@@ -52,7 +52,7 @@ jobs:
 
   deploy:
     runs-on: windows-latest
-    needs: build
+    needs: test
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
