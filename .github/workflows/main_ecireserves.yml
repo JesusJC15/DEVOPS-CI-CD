@@ -32,6 +32,23 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
+          
+  test:
+    runs-on: windows-latest
+    needs: build
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Ejecutar pruebas
+        run: mvn verify --batch-mode
 
   deploy:
     runs-on: windows-latest
