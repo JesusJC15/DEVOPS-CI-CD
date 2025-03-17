@@ -69,9 +69,14 @@ Este punto no se pudieron realizar con MySQL sino que se realizaron con conexió
 
 ### 11. Prueba nuevamente la aplicación, ya debería estar funcionando!
 Funcionamiento de la aplicación con MongoDB Atlas y Postman para ingresar los datos
+
 ![](/assets/16.png)
+
 ![](/assets/19.png)
+
 ![](/assets/17.png)
+
 ![](/assets/18.png)
+
 ![](/assets/20.png)
 
