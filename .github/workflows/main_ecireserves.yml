@@ -23,9 +23,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'microsoft'
-          
+
       - name: Set environment variables
-        run: echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> $GITHUB_ENV
+        run: echo "MONGODB_PASSWORD=${{ secrets.MONGODB_PASSWORD }}" >> $GITHUB_ENV
 
       - name: Build with Maven
         run: mvn clean install
