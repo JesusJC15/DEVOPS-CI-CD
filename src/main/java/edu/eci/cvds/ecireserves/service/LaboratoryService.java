@@ -14,8 +14,12 @@ import edu.eci.cvds.ecireserves.repository.LaboratoryRepository;
 
 @Service
 public class LaboratoryService {
+    private final LaboratoryRepository laboratoryRepository;
+
     @Autowired
-    private LaboratoryRepository laboratoryRepository;
+    public LaboratoryService(LaboratoryRepository laboratoryRepository) {
+        this.laboratoryRepository = laboratoryRepository;
+    }
 
     /**
      * Get all laboratories

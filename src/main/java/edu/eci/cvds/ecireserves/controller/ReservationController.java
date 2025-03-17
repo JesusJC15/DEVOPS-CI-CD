@@ -25,8 +25,12 @@ import edu.eci.cvds.ecireserves.service.ReservationService;
 @RestController
 @RequestMapping("/api/reservations")
 public class ReservationController {
+    private final ReservationService reservationService;
+
     @Autowired
-    private ReservationService reservationService;
+    public ReservationController(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<Reservation>>> getAllReservations() {
@@ -35,37 +39,37 @@ public class ReservationController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<ApiResponse<List<Reservation>>> getReservationsByUserId(@PathVariable("userId") String userId) {
-        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas del usuario encontradas", reservationService.getReservationsByUserId(userId)));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas del usuario con id: " + userId, reservationService.getReservationsByUserId(userId)));
     }
 
     @GetMapping("/laboratory/{laboratoryId}")
     public ResponseEntity<ApiResponse<List<Reservation>>> getReservationsByLaboratoryId(@PathVariable("laboratoryId") String laboratoryId) {
-        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas del laboratorio encontradas", reservationService.getReservationsByLaboratoryId(laboratoryId)));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas del laboratorio con id: " + laboratoryId, reservationService.getReservationsByLaboratoryId(laboratoryId)));
     }
 
     @GetMapping("status/{status}")
     public ResponseEntity<ApiResponse<List<Reservation>>> getReservationsByStatus(@PathVariable("status") ReservationStatus status) {
-        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas por estado encontradas", reservationService.getReservationsByStatus(status)));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas por estado: " + status, reservationService.getReservationsByStatus(status)));
     }
 
     @GetMapping("user/{userId}/status/{status}")
     public ResponseEntity<ApiResponse<List<Reservation>>> getReservationsByUserIdAndStatus(@PathVariable("userId") String userId, @PathVariable("status") ReservationStatus status) {
-        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas encontradas", reservationService.getReservationsByUserIdAndStatus(userId, status)));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas del usuario con id: " + userId + " y estado: " + status, reservationService.getReservationsByUserIdAndStatus(userId, status)));
     }
 
     @GetMapping("date/{date}")
     public ResponseEntity<ApiResponse<List<Reservation>>> getReservationsByDate(@PathVariable("date") LocalDate date) {
-        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas por fecha encontradas", reservationService.getReservationsByDate(date)));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas por fecha: " + date.toString(), reservationService.getReservationsByDate(date)));
     }
 
     @GetMapping("startsTime/{startTime}")
     public ResponseEntity<ApiResponse<List<Reservation>>> getReservationsByStartTime(@PathVariable("startTime") LocalTime startTime) {
-        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas por hora de inicio encontradas", reservationService.getReservationsByStartTime(startTime)));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas que inician a las: " + startTime.toString(), reservationService.getReservationsByStartTime(startTime)));
     }
 
     @GetMapping("duration/{duration}")
     public ResponseEntity<ApiResponse<List<Reservation>>> getReservationsByDuration(@PathVariable("duration") int duration) {
-        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas por duración encontradas", reservationService.getReservationsByDuration(duration)));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Reservas por duración: " + duration + "MIN", reservationService.getReservationsByDuration(duration)));
     }
 
     @PostMapping
