@@ -24,8 +24,12 @@ import edu.eci.cvds.ecireserves.service.UserService;
 @RequestMapping("/api/users")
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<User>>> getAllUsers() {
@@ -34,12 +38,12 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<User>> getUserById(@PathVariable("id") String id) throws EciReservesException {
-        return ResponseEntity.ok(new ApiResponse<>(true, "Usuario encontrado", userService.getUserById(id)));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Usuario con id: " + id, userService.getUserById(id)));
     }
 
     @GetMapping("/search")
     public ResponseEntity<ApiResponse<List<User>>> getUsersByName(@RequestParam String name) {
-        return ResponseEntity.ok(new ApiResponse<>(true, "Usuarios encontrados", userService.getUsersByName(name)));
+        return ResponseEntity.ok(new ApiResponse<>(true, "Usuarios con nombre: " + name , userService.getUsersByName(name)));
     }
     
     @PostMapping

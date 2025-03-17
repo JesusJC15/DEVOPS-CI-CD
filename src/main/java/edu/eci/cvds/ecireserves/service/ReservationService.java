@@ -17,10 +17,14 @@ import edu.eci.cvds.ecireserves.repository.ReservationRepository;
 
 @Service
 public class ReservationService {
+    private final ReservationRepository reservationRepository;
+    private final LaboratoryRepository laboratoryRepository;
+
     @Autowired
-    private ReservationRepository reservationRepository;
-    @Autowired
-    private LaboratoryRepository laboratoryRepository;
+    public ReservationService(ReservationRepository reservationRepository, LaboratoryRepository laboratoryRepository) {
+        this.reservationRepository = reservationRepository;
+        this.laboratoryRepository = laboratoryRepository;
+    }
 
     /**
      * Get all reservations

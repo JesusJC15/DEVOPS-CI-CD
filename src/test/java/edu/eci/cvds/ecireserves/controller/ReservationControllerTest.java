@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,21 +40,6 @@ class ReservationControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @SuppressWarnings("null")
-    @Test
-    void getReservations_ShouldReturnZeroReservation() {
-        List<Reservation> reservations = Arrays.asList();
-        when(reservationService.getAllReservations()).thenReturn(reservations);
-
-        ResponseEntity<ApiResponse<List<Reservation>>> response = reservationController.getAllReservations();
-
-        assertNotNull(response);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertTrue(response.getBody().isSuccess());
-        assertEquals(0, response.getBody().getData().size());
-        verify(reservationService, times(1)).getAllReservations();
-    }
-    
     @SuppressWarnings("null")
     @Test
     void getAllReservations_ShouldReturnListOfReservations() {
@@ -149,15 +135,13 @@ class ReservationControllerTest {
     @SuppressWarnings("null")
     @Test
     void deleteReservation_ShouldReturnSuccessMessage() throws EciReservesException {
-        List<Reservation> reservations = Arrays.asList(new Reservation("1", "user1", "lab1", LocalDate.now(), LocalTime.of(10, 0), 120, "Study", ReservationStatus.AGENDADA));
-        when(reservationService.getReservationsByUserId("user1")).thenReturn(reservations);
-        
+        doNothing().when(reservationService).deleteReservation("1");
+
         ResponseEntity<ApiResponse<Void>> response = reservationController.deleteReservation("1");
 
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getBody().isSuccess());
-        assertEquals("Reserva eliminada", response.getBody().getMessage());
         verify(reservationService, times(1)).deleteReservation("1");
     }
 

@@ -14,8 +14,12 @@ import edu.eci.cvds.ecireserves.repository.UserRepository;
 @Service
 public class UserService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    UserRepository userRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /**
      * Get all users
