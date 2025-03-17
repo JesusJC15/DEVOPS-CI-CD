@@ -61,9 +61,17 @@ El primer job se llamará build, el segundo test y el tercero deploy, además, e
 ![](/assets/15.png)
 
 ### 9. En este punto la aplicación no debería funcionar totalmente debido a qué no hay una base de datos preparada, debes verificar esta situación a través de los logs, crea una base de datos MySQL con facturación de 0 dólares
+Este punto no se pudieron realizar con MySQL sino que se realizaron con conexión con MongoDB Atlas
 
 
 ### 10. Para utilizar la base de datos, configura los datos de conexión como una o varias variables de entorno tanto en App Service como en el archivo application.properties de tu proyecto
-
+Este punto no se pudieron realizar con MySQL sino que se realizaron con conexión con MongoDB Atlas
 
 ### 11. Prueba nuevamente la aplicación, ya debería estar funcionando!
+Funcionamiento de la aplicación con MongoDB Atlas y Postman para ingresar los datos
+![](/assets/16.png)
+![](/assets/19.png)
+![](/assets/17.png)
+![](/assets/18.png)
+![](/assets/20.png)
+
