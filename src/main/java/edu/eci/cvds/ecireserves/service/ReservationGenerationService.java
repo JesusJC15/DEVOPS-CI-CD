@@ -10,7 +10,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.eci.cvds.ecireserves.EciReservesApplication;
 import edu.eci.cvds.ecireserves.enums.ReservationStatus;
 import edu.eci.cvds.ecireserves.model.Reservation;
 import edu.eci.cvds.ecireserves.repository.ReservationRepository;
@@ -18,13 +17,10 @@ import edu.eci.cvds.ecireserves.repository.ReservationRepository;
 @Service
 public class ReservationGenerationService {
 
-    private final EciReservesApplication eciReservesApplication;
-
     @Autowired
     private final ReservationRepository reservationRepository;
-    public ReservationGenerationService(ReservationRepository reservationRepository, EciReservesApplication eciReservesApplication) {
+    public ReservationGenerationService(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
-        this.eciReservesApplication = eciReservesApplication;
     }
 
     private final Random random = new Random();
@@ -44,7 +40,7 @@ public class ReservationGenerationService {
             String laboratoryId = laboratoryIds[random.nextInt(laboratoryIds.length)];
             LocalDate date = LocalDate.now().plusDays(random.nextInt(30));
             LocalTime startTime = LocalTime.of(random.nextInt(24), random.nextInt(13) + 7, 0);
-            int duration = random.nextInt(151) + 30;
+            int duration = (random.nextInt(6) + 1) * 30;
             String purpose = purposes[random.nextInt(purposes.length)];
             ReservationStatus status = ReservationStatus.values()[random.nextInt(ReservationStatus.values().length)];
             int priority = random.nextInt(5) + 1;

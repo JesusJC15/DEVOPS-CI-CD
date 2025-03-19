@@ -18,7 +18,7 @@ import edu.eci.cvds.ecireserves.service.ReservationGenerationService;
 
 @RestController
 @RequestMapping("/api/reservationsGeneration")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ReservationGenerationController {
 
     @Autowired
