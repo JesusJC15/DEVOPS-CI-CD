@@ -153,4 +153,5 @@ Un gráfico de pie que muestra la demanda relativa de cada laboratorio. Es útil
 
 ## Entrega
 CI/CD: https://ecireserves-bfccasdkhxcwgnev.eastus-01.azurewebsites.net/
+
 DATA: https://ecireserves-bfccasdkhxcwgnev.eastus-01.azurewebsites.net/
