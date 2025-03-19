@@ -150,3 +150,7 @@ Un gráfico de líneas que muestra el promedio de reservas por nivel de priorida
 Un gráfico de pie que muestra la demanda relativa de cada laboratorio. Es útil para identificar qué laboratorios son más populares.
 
 ![](/assets/29.png)
+
+## Entrega
+CI/CD: https://ecireserves-bfccasdkhxcwgnev.eastus-01.azurewebsites.net/
+DATA: https://ecireserves-bfccasdkhxcwgnev.eastus-01.azurewebsites.net/
